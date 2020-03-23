@@ -1,0 +1,11 @@
+/Users/ar-amitrajit.bose/eclipse-workspace/ProductApp/src/main/java/com/rakuten/training/ProductAppApplication.java
+/Users/ar-amitrajit.bose/eclipse-workspace/ProductApp/src/main/java/com/rakuten/training/dal/ReviewDAO.java
+/Users/ar-amitrajit.bose/eclipse-workspace/ProductApp/src/main/java/com/rakuten/training/service/ProductService.java
+/Users/ar-amitrajit.bose/eclipse-workspace/ProductApp/src/main/java/com/rakuten/training/domain/Review.java
+/Users/ar-amitrajit.bose/eclipse-workspace/ProductApp/src/main/java/com/rakuten/training/dal/ReviewDAOJpaImpl.java
+/Users/ar-amitrajit.bose/eclipse-workspace/ProductApp/src/main/java/com/rakuten/training/domain/Product.java
+/Users/ar-amitrajit.bose/eclipse-workspace/ProductApp/src/main/java/com/rakuten/training/dal/ProductDAO.java
+/Users/ar-amitrajit.bose/eclipse-workspace/ProductApp/src/main/java/com/rakuten/training/ui/ProductConsoleUI.java
+/Users/ar-amitrajit.bose/eclipse-workspace/ProductApp/src/main/java/com/rakuten/training/dal/ProductDAOInMemImpl.java
+/Users/ar-amitrajit.bose/eclipse-workspace/ProductApp/src/main/java/com/rakuten/training/dal/ProductDAOJpaImpl.java
+/Users/ar-amitrajit.bose/eclipse-workspace/ProductApp/src/main/java/com/rakuten/training/service/ProductServiceImpl.java
