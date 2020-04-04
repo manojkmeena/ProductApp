@@ -1,10 +1,15 @@
 package com.rakuten.training.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Product {
@@ -22,6 +27,11 @@ public class Product {
 
   @Column(name = "product_qoh")
   int qoh;
+
+//  @JsonIgnore
+//  @JoinColumn(name = "product_id")
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.REMOVE)
+  List<Review> reviews;
 
   public Product() {}
 
@@ -62,5 +72,13 @@ public class Product {
 
   public void setQoh(int qoh) {
     this.qoh = qoh;
+  }
+
+  public List<Review> getReviews() {
+    return reviews;
+  }
+
+  public void setReviews(List<Review> reviews) {
+    this.reviews = reviews;
   }
 }

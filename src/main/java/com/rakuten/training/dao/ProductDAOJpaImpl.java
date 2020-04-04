@@ -37,7 +37,11 @@ public class ProductDAOJpaImpl implements ProductDAO {
 
   @Override
   public void deleteById(int id) {
-	Product p = em.getReference(Product.class, id);
+    /*Query query = em.createQuery("DELETE FROM Product as p WHERE p.id=:idParam");
+    query.setParameter("idParam", id);
+    query.executeUpdate();*/
+    //Product p = em.find(Product.class, id);
+	Product p = em.getReference(Product.class, id); // this would avoid a SELECT as opposed to find(), thus it is more optimised
     em.remove(p);
   }
 }

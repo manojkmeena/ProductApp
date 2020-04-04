@@ -19,47 +19,47 @@ import com.rakuten.training.service.ProductService;
 
 @RestController
 public class ProductController {
+  // Here Product is considered as a Resource and this is the controller class
 
-	@Autowired
-	ProductService service;
+  @Autowired ProductService service;
 
-	// @RequestMapping(method = RequestMethod.GET, value = "/products")
-	@GetMapping("/products")
-	public List<Product> getAllProducts() {
-		return service.findAll(); // by default spring converts and returns a JSONified list of product objects
-	}
+  //	@RequestMapping(method = RequestMethod.GET, value = "/products")
+  @GetMapping("/products")
+  public List<Product> getAllProducts() {
+    return service.findAll(); // by default spring converts and returns a JSONified list of product objects
+  }
 
-	@GetMapping("/products/{prod_id}") // URI path template
-	public ResponseEntity<Product> getProductById(@PathVariable("prod_id") int id) {
-		Product p = service.findById(id);
-		if (p != null) {
-			return new ResponseEntity<Product>(p, HttpStatus.OK); // 200
-		} else {
-			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND); // 404
-		}
-	}
+  @GetMapping("/products/{prod_id}") // URI path template
+  public ResponseEntity<Product> getProductById(@PathVariable("prod_id") int id) {
+    Product p = service.findById(id);
+    if (p != null) {
+      return new ResponseEntity<Product>(p, HttpStatus.OK); // 200
+    } else {
+      return new ResponseEntity<Product>(HttpStatus.NOT_FOUND); // 404
+    }
+  }
 
-	@PostMapping("/products")
-	public ResponseEntity<Product> addProduct(@RequestBody Product toBeAdded) {
-		try {
-			int id = service.addNewProduct(toBeAdded);
-			HttpHeaders header = new HttpHeaders();
-			header.setLocation(URI.create("/products/" + id));
-			return new ResponseEntity<Product>(header, HttpStatus.CREATED);
-		} catch (IllegalArgumentException e) {
-			return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
-		}
-	}
+  @PostMapping("/products")
+  public ResponseEntity<Product> addProduct(@RequestBody Product toBeAdded) {
+    try {
+      int id = service.addNewProduct(toBeAdded);
+      HttpHeaders header = new HttpHeaders();
+      header.setLocation(URI.create("/products/" + id));
+      return new ResponseEntity<Product>(header, HttpStatus.CREATED);
+    } catch (IllegalArgumentException e) {
+      return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
+    }
+  }
 
-	@DeleteMapping("/products/{prod_id}")
-	public ResponseEntity<Product> deleteProduct(@PathVariable("prod_id") int id) {
-		try {
-			service.removeProduct(id);
-			return new ResponseEntity<Product>(HttpStatus.NO_CONTENT); // 204
-		} catch (IllegalStateException e) {
-			return new ResponseEntity<Product>(HttpStatus.CONFLICT); // 409
-		} catch (NullPointerException e) {
-			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND); // 404
-		}
-	}
+  @DeleteMapping("/products/{prod_id}")
+  public ResponseEntity<Product> deleteProduct(@PathVariable("prod_id") int id) {
+    try {
+      service.removeProduct(id);
+      return new ResponseEntity<Product>(HttpStatus.NO_CONTENT); // 204
+    } catch (IllegalStateException e) {
+      return new ResponseEntity<Product>(HttpStatus.CONFLICT); // 409
+    } catch (NullPointerException e) {
+      return new ResponseEntity<Product>(HttpStatus.NOT_FOUND); // 404
+    }
+  }
 }

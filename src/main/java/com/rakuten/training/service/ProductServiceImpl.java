@@ -13,40 +13,45 @@ import com.rakuten.training.domain.Product;
 @Transactional
 public class ProductServiceImpl implements ProductService {
 
-	@Autowired
-	ProductDAO dao;
+  ProductDAO dao; // = new ProductDAOInMemImpl();
 
-	@Override
-	public int addNewProduct(Product toBeAdded) {
-		if (toBeAdded.getPrice() * toBeAdded.getQoh() >= 10000) {
-			Product added = dao.save(toBeAdded);
-			return added.getId();
-		} else {
-			throw new IllegalArgumentException("Monetory value of product is less than 10000");
-		}
-	}
+  @Autowired
+  public void setDao(ProductDAO dao) {
+    this.dao = dao;
+  }
 
-	@Override
-	public void removeProduct(int id) {
-		Product existing = dao.findById(id);
-		if (existing != null) {
-			if (existing.getPrice() * existing.getQoh() >= 1000000) {
-				throw new IllegalStateException("Cannot delete monetary value greater than 100000");
-			} else {
-				dao.deleteById(id);
-			}
-		} else {
-			throw new NullPointerException("Product ID not present");
-		}
-	}
+  @Override
+  public int addNewProduct(Product toBeAdded) {
+    if (toBeAdded.getPrice() * toBeAdded.getQoh() >= 10000) {
+      Product added = dao.save(toBeAdded);
+      return added.getId();
+    } else {
+      throw new IllegalArgumentException("Monetory value of product is less than 10000");
+    }
+  }
 
-	@Override
-	public List<Product> findAll() {
-		return dao.findAll();
-	}
+  @Override
+  public void removeProduct(int id) {
+    Product existing = dao.findById(id);
+    if (existing != null) {
+      if (existing.getPrice() * existing.getQoh() >= 1000000) {
+        throw new IllegalStateException("Cannot delete monetary value greater than 100000");
+      } else {
+        dao.deleteById(id);
+      }
+    }
+    else {
+    	throw new NullPointerException("Product ID not present");
+    }
+  }
 
-	@Override
-	public Product findById(int id) {
-		return dao.findById(id);
-	}
+  @Override
+  public List<Product> findAll() {
+    return dao.findAll();
+  }
+
+  @Override
+  public Product findById(int id) {
+    return dao.findById(id);
+  }
 }
